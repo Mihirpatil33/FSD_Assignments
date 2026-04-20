@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AURUM — Luxury Fashion</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       CUSTOM CURSOR
+  ═══════════════════════════════════════════ -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ═══════════════════════════════════════════
+       SEARCH OVERLAY
+  ═══════════════════════════════════════════ -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-box">
+      <i class="fa fa-search search-icon"></i>
+      <input type="text" placeholder="Search for pieces…" id="searchInput"/>
+      <button class="search-close" onclick="toggleSearch()">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CART OVERLAY + SIDEBAR
+  ═══════════════════════════════════════════ -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Your Curation</h3>
+      <button class="cart-close" onclick="toggleCart()">
+        <i class="fa fa-times"></i>
+      </button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <button class="btn-checkout" onclick="showToast('Proceeding to checkout…', 'fa-lock')">
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       TOAST CONTAINER
+  ═══════════════════════════════════════════ -->
+  <div class="toast-container-custom" id="toastContainer"></div>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#" class="nav-logo">AUR<span>U</span>M</a>
+
+    <ul class="nav-links">
+      <li><a href="#collections">Collections</a></li>
+      <li><a href="#products">New In</a></li>
+      <li><a href="#featured">Featured</a></li>
+      <li><a href="#testimonials">Stories</a></li>
+    </ul>
+
+    <div class="nav-icons">
+      <a href="#" onclick="toggleSearch(); return false;">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="#" onclick="toggleCart(); return false;" class="cart-icon-wrap">
+        <i class="fa fa-shopping-bag"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </a>
+      <a href="#">
+        <i class="fa-regular fa-user"></i>
+      </a>
+      <button class="nav-hamburger" onclick="toggleMobileMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO SECTION
+  ═══════════════════════════════════════════ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">Spring Collection 2025</div>
+      <h1>Dressed in<br><em>Timeless</em><br>Elegance</h1>
+      <p>Discover our curated selection of luxury fashion — where heritage craftsmanship meets contemporary vision. Each piece tells a story of refined living.</p>
+      <div class="hero-btns">
+        <a href="#products" class="btn-gold">
+          <span>Explore Collection</span>
+          <i class="fa fa-arrow-right btn-arrow"></i>
+        </a>
+        <a href="#featured" class="btn-outline-gold">
+          <span>Our Story</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image-panel">
+      <div class="hero-img-placeholder">
+        <div class="hero-model-silhouette"></div>
+      </div>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll to discover</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       MARQUEE STRIP
+  ═══════════════════════════════════════════ -->
+  <div class="marquee-strip">
+    <div class="marquee-inner">
+      <span>New Arrivals</span><span class="dot">·</span>
+      <span>Spring 2025</span><span class="dot">·</span>
+      <span>Luxury Craftsmanship</span><span class="dot">·</span>
+      <span>Free Shipping Over ₹5000</span><span class="dot">·</span>
+      <span>Exclusive Members</span><span class="dot">·</span>
+      <span>New Arrivals</span><span class="dot">·</span>
+      <span>Spring 2025</span><span class="dot">·</span>
+      <span>Luxury Craftsmanship</span><span class="dot">·</span>
+      <span>Free Shipping Over ₹5000</span><span class="dot">·</span>
+      <span>Exclusive Members</span><span class="dot">·</span>
+      <span>New Arrivals</span><span class="dot">·</span>
+      <span>Spring 2025</span><span class="dot">·</span>
+      <span>Luxury Craftsmanship</span><span class="dot">·</span>
+      <span>Free Shipping Over ₹5000</span><span class="dot">·</span>
+      <span>Exclusive Members</span><span class="dot">·</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CATEGORIES SECTION
+  ═══════════════════════════════════════════ -->
+  <section class="categories" id="collections">
+    <div class="reveal">
+      <span class="section-label">Browse by Category</span>
+      <h2 class="section-title">Explore <em>Our World</em></h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="cat-grid reveal">
+      <div class="cat-card" onclick="filterProducts('women')">
+        <div class="cat-bg cat-bg-1"></div>
+        <i class="cat-icon fa fa-person-dress"></i>
+        <div class="cat-label">
+          Women
+          <div class="cat-count">48 pieces</div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('men')">
+        <div class="cat-bg cat-bg-2"></div>
+        <i class="cat-icon fa fa-person"></i>
+        <div class="cat-label">
+          Men
+          <div class="cat-count">36 pieces</div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('accessories')">
+        <div class="cat-bg cat-bg-3"></div>
+        <i class="cat-icon fa fa-gem"></i>
+        <div class="cat-label">
+          Accessories
+          <div class="cat-count">72 pieces</div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('shoes')">
+        <div class="cat-bg cat-bg-4"></div>
+        <i class="cat-icon fa fa-shoe-prints"></i>
+        <div class="cat-label">
+          Footwear
+          <div class="cat-count">29 pieces</div>
+        </div>
+      </div>
+      <div class="cat-card" onclick="filterProducts('bags')">
+        <div class="cat-bg cat-bg-5"></div>
+        <i class="cat-icon fa fa-bag-shopping"></i>
+        <div class="cat-label">
+          Bags
+          <div class="cat-count">41 pieces</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PRODUCTS SECTION
+  ═══════════════════════════════════════════ -->
+  <section class="products-section" id="products">
+    <div class="reveal">
+      <span class="section-label">New Arrivals</span>
+      <h2 class="section-title">The <em>Latest</em> Pieces</h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar reveal" id="filterBar">
+      <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+      <button class="filter-btn" onclick="filterProducts('women', this)">Women</button>
+      <button class="filter-btn" onclick="filterProducts('men', this)">Men</button>
+      <button class="filter-btn" onclick="filterProducts('accessories', this)">Accessories</button>
+      <button class="filter-btn" onclick="filterProducts('shoes', this)">Footwear</button>
+      <button class="filter-btn" onclick="filterProducts('bags', this)">Bags</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid reveal" id="productGrid">
+
+      <!-- Product 1 -->
+      <div class="product-card" data-cat="women" data-price="12800" data-id="1">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-1"></div>
+          <i class="product-icon fa fa-person-dress"></i>
+          <span class="product-tag tag-new">New</span>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Women · Dresses</div>
+          <div class="product-name">Florentine Silk Gown</div>
+          <div class="product-price">
+            <span class="price-current">₹12,800</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa-regular fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card" data-cat="men" data-price="8500" data-id="2">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-2"></div>
+          <i class="product-icon fa fa-shirt"></i>
+          <span class="product-tag tag-limited">Limited</span>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Men · Shirts</div>
+          <div class="product-name">Venetian Linen Shirt</div>
+          <div class="product-price">
+            <span class="price-current">₹8,500</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card" data-cat="accessories" data-price="24500" data-id="3">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-3"></div>
+          <i class="product-icon fa fa-gem"></i>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Accessories · Jewellery</div>
+          <div class="product-name">Onyx Pearl Necklace</div>
+          <div class="product-price">
+            <span class="price-current">₹24,500</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star-half-stroke"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product-card" data-cat="shoes" data-price="15200" data-id="4">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-4"></div>
+          <i class="product-icon fa fa-shoe-prints"></i>
+          <span class="product-tag tag-sale">−20%</span>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Footwear · Heels</div>
+          <div class="product-name">Amalfi Suede Heels</div>
+          <div class="product-price">
+            <span class="price-current">₹15,200</span>
+            <span class="price-old">₹19,000</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 5 -->
+      <div class="product-card" data-cat="bags" data-price="38000" data-id="5">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-5"></div>
+          <i class="product-icon fa fa-bag-shopping"></i>
+          <span class="product-tag tag-limited">Limited</span>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Bags · Structured</div>
+          <div class="product-name">Milano Leather Tote</div>
+          <div class="product-price">
+            <span class="price-current">₹38,000</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 6 -->
+      <div class="product-card" data-cat="women" data-price="9800" data-id="6">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-6"></div>
+          <i class="product-icon fa fa-person-dress"></i>
+          <span class="product-tag tag-new">New</span>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Women · Tops</div>
+          <div class="product-name">Riviera Lace Blouse</div>
+          <div class="product-price">
+            <span class="price-current">₹9,800</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa-regular fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 7 -->
+      <div class="product-card" data-cat="men" data-price="18500" data-id="7">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-7"></div>
+          <i class="product-icon fa fa-vest"></i>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Men · Outerwear</div>
+          <div class="product-name">Bordeaux Wool Coat</div>
+          <div class="product-price">
+            <span class="price-current">₹18,500</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 8 -->
+      <div class="product-card" data-cat="accessories" data-price="6200" data-id="8">
+        <div class="product-img">
+          <div class="product-img-bg p-bg-8"></div>
+          <i class="product-icon fa fa-glasses"></i>
+          <span class="product-tag tag-sale">−15%</span>
+          <div class="product-actions">
+            <button class="btn-add-cart" onclick="addToCart(this)">Add to Bag</button>
+            <button class="btn-wish" onclick="toggleWish(this)"><i class="fa-regular fa-heart"></i></button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">Accessories · Eyewear</div>
+          <div class="product-name">Capri Gold Sunglasses</div>
+          <div class="product-price">
+            <span class="price-current">₹6,200</span>
+            <span class="price-old">₹7,300</span>
+          </div>
+          <div class="stars">
+            <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+            <i class="fa fa-star"></i><i class="fa-regular fa-star"></i>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /product-grid -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FEATURED EDITORIAL BANNER
+  ═══════════════════════════════════════════ -->
+  <section class="featured-banner" id="featured">
+    <div class="banner-inner reveal">
+      <div class="banner-left">
+        <span class="section-label">Editorial Spotlight</span>
+        <h2 class="section-title banner-title">The Art of<br><em>Dressing Well</em></h2>
+        <p class="banner-desc">
+          Our atelier sources only the finest materials from artisans who have perfected their craft
+          across generations. Every stitch, every fold, every silhouette is an act of devotion to
+          beauty and precision.
+        </p>
+        <a href="#products" class="btn-gold">
+          Discover More <i class="fa fa-arrow-right btn-arrow"></i>
+        </a>
+      </div>
+      <div class="banner-right">
+        <div class="banner-decoration">A</div>
+        <div class="banner-brand-text">
+          <div class="banner-wordmark">AURUM</div>
+          <div class="banner-est">Est. 2015</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════════ -->
+  <section class="testimonials" id="testimonials">
+    <div class="testi-header reveal">
+      <span class="section-label">Client Stories</span>
+      <h2 class="section-title">Voices of <em>Elegance</em></h2>
+      <div class="divider divider-center"></div>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <p class="testi-quote">"The Florentine Gown arrived like a dream — the silk moved like liquid gold. I have never felt more like myself."</p>
+        <div class="testi-author">Priya Mehta</div>
+        <div class="testi-role">Fashion Director, Mumbai</div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay: 0.15s">
+        <p class="testi-quote">"AURUM understands that true luxury is not about excess. It is about the quiet confidence a perfectly tailored coat gives you."</p>
+        <div class="testi-author">Arjun Kapoor</div>
+        <div class="testi-role">Creative Consultant, Delhi</div>
+      </div>
+      <div class="testi-card reveal" style="transition-delay: 0.3s">
+        <p class="testi-quote">"Every piece is a conversation between tradition and the modern world. My Milano Tote is seven years old and still draws compliments."</p>
+        <div class="testi-author">Riya Desai</div>
+        <div class="testi-role">Architect, Pune</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       NEWSLETTER
+  ═══════════════════════════════════════════ -->
+  <section class="newsletter">
+    <div class="reveal">
+      <span class="section-label">Join the Circle</span>
+      <h2 class="section-title newsletter-title">Stay <em>Informed</em></h2>
+      <p class="newsletter-desc">
+        Receive exclusive access to new collections, private sales, and curated stories from our world.
+      </p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Your email address" id="emailInput"/>
+        <button onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo footer-logo">AUR<span>U</span>M</a>
+        <p>Where heritage craftsmanship meets contemporary luxury. Curated for those who understand that the finest things in life are worth waiting for.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-pinterest-p"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Collections</h4>
+        <ul>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Women</a></li>
+          <li><a href="#">Men</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Footwear</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>House of Aurum</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Craftsmanship</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Client Services</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Shipping &amp; Returns</a></li>
+          <li><a href="#">Size Guide</a></li>
+          <li><a href="#">Care Instructions</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 AURUM. All rights reserved.</p>
+      <div class="payment-icons">
+        <i class="fab fa-cc-visa pay-icon"></i>
+        <i class="fab fa-cc-mastercard pay-icon"></i>
+        <i class="fab fa-cc-amex pay-icon"></i>
+        <i class="fab fa-cc-paypal pay-icon"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>
